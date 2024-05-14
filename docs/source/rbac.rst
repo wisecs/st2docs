@@ -389,14 +389,20 @@ Automatically Granting Roles Based on LDAP Group Membership
    This functionality is only available in |st2| v2.3.0 and above, with the LDAP auth backend
    used for authentication.
 
-In addition to manually assigning roles to the users based on the definitions in the
-``/opt/stackstorm/rbac/assignments/`` directory, |st2| also supports automatically granting roles
+As an alternative to manually assigning roles to the users based on the definitions in the
+``/opt/stackstorm/rbac/assignments/`` directory, |st2| supports automatically granting roles
 to users upon authentication, based on LDAP groups membership.
 
 This comes handy in enterprise environments and makes |st2| user provisioning easier and faster.
 It means administrators don't need to manually write and manage RBAC role assignment files on disk,
 because roles are automatically granted to the users based on their LDAP group membership and
 mappings files in ``/opt/stackstorm/rbac/mappings/`` directory.
+
+.. note::
+
+   With LDAP authentication enabled, local users will no longer be able to authenticate and
+   user-specific permissions granted in the ``/opt/stackstorm/rbac/assignments/`` directory will
+   not apply. Only permissions mapped to groups will be granted.
 
 To be able to utilize this feature it first needs to be enabled in ``st2.conf`` by setting
 ``rbac.sync_remote_groups`` option to ``True``.
